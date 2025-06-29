@@ -1,0 +1,73 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}Instructor Dashboard{% endblock %}
+{% block content %}
+    <div class="mt-5 text-center">
+        <h1 class="mb-2">Welcome, {{ user.username }}!</h1>
+        <div class="subtitle-classic mb-4">Inspire, Create, and Lead in IT Education</div>
+    </div>
+    <h2>My Courses</h2>
+    {% if courses %}
+        <div class="row">
+            {% for course in courses %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.title }}</h5>
+                            <p class="card-text">{{ course.description|truncatewords:15 }}</p>
+                            <p class="text-muted">Students enrolled: {{ course.enrollments.count }}</p>
+                            <div class="btn-group">
+                                <a href="/courses/{{ course.id }}/" class="btn btn-primary">View Course</a>
+                                <a href="/instructor/course/{{ course.id }}/manage/" class="btn btn-secondary">Manage</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            You haven't created any courses yet.
+        </div>
+    {% endif %}
+    <div class="mt-4">
+        <a href="/instructor/create-course/" class="btn btn-success">Create New Course</a>
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+    </div>
+    <h3>Announcements</h3>
+    <ul class="list-group mb-4">
+      {% for announcement in announcements %}
+        <li class="list-group-item">
+          <strong>{{ announcement.title }}</strong> ({{ announcement.course.title }})<br>
+          <small>{{ announcement.created_at|date:'Y-m-d H:i' }}</small><br>
+          {{ announcement.message|linebreaks }}
+        </li>
+      {% empty %}
+        <li class="list-group-item">No announcements.</li>
+      {% endfor %}
+    </ul>
+    <h3>Course Analytics</h3>
+    {% for item in analytics %}
+      <div class="course-analytics" style="margin-bottom: 1em;">
+        <h4>{{ item.course.title }}</h4>
+        <div>Enrolled students: {{ item.enroll_count }}</div>
+        <div>Average progress: {{ item.avg_progress }}%</div>
+        <div>Quizzes: {{ item.quiz_count }}</div>
+      </div>
+    {% endfor %}
+{% endblock %}
+{% block extra_head %}
+<style>
+.subtitle-classic {
+    color: #3b6ea5;
+    font-size: 1.2rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #e3eaf6 0%, #c9d6e3 100%);
+    border-radius: 8px;
+    padding: 0.4rem 1.2rem;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+}
+</style>
+{% endblock %} 

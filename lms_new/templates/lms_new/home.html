@@ -1,0 +1,103 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}LMS Home - IT Courses{% endblock %}
+{% block content %}
+    <div class="mt-5 text-center">
+        <h1 class="mb-2">Welcome to the IT Learning Management System</h1>
+        <div class="subtitle-classic mb-4">Empowering Your Future, One Course at a Time</div>
+    </div>
+    <h2>Course Categories</h2>
+    <div class="row g-4 mb-4 justify-content-center">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="category-card card text-center shadow-lg border-0 h-100 p-3" style="background: linear-gradient(135deg, #0F2027 0%, #2C5364 100%); color: #f4faff;">
+                <div class="display-4 mb-2"><i class="bi bi-globe2"></i></div>
+                <h5 class="fw-bold mb-1">Web Development</h5>
+                <div class="small">HTML, CSS, JavaScript, Django, and more</div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="category-card card text-center shadow-lg border-0 h-100 p-3" style="background: linear-gradient(135deg, #1ABC9C 0%, #3498DB 100%); color: #fff;">
+                <div class="display-4 mb-2"><i class="bi bi-bar-chart-line"></i></div>
+                <h5 class="fw-bold mb-1">Data Science</h5>
+                <div class="small">Python, ML, Data Analysis, Visualization</div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="category-card card text-center shadow-lg border-0 h-100 p-3" style="background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%); color: #fff;">
+                <div class="display-4 mb-2"><i class="bi bi-code-slash"></i></div>
+                <h5 class="fw-bold mb-1">Programming Languages</h5>
+                <div class="small">Python, Java, C++, and more</div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="category-card card text-center shadow-lg border-0 h-100 p-3" style="background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%); color: #fff;">
+                <div class="display-4 mb-2"><i class="bi bi-robot"></i></div>
+                <h5 class="fw-bold mb-1">AI & Automation</h5>
+                <div class="small">AI, Automation, Robotics, Chatbots</div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="category-card card text-center shadow-lg border-0 h-100 p-3" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); color: #2d3a4a;">
+                <div class="display-4 mb-2"><i class="bi bi-emoji-smile"></i></div>
+                <h5 class="fw-bold mb-1">Tech for Kids</h5>
+                <div class="small">Coding, Games, Fun Projects</div>
+            </div>
+        </div>
+    </div>
+    <h2>Featured Courses</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Python for Beginners</h5>
+                    <p class="card-text">Start your programming journey with Python.</p>
+                    <a href="/courses/1/" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Full Stack Web Development</h5>
+                    <p class="card-text">Learn HTML, CSS, JavaScript, and Django.</p>
+                    <a href="/courses/2/" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Machine Learning Basics</h5>
+                    <p class="card-text">Get started with data science and ML.</p>
+                    <a href="/courses/3/" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_head %}
+<style>
+.subtitle-classic {
+    color: #3b6ea5;
+    font-size: 1.5rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #e3eaf6 0%, #c9d6e3 100%);
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+}
+.category-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border-radius: 1.25rem !important;
+    box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.10);
+}
+.category-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.18);
+    z-index: 2;
+}
+</style>
+{% endblock %} 
