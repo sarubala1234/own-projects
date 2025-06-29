@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LMS{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/lms_new/theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #f7f9fb;
+            color: #2d3a4a;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #e3eaf6 0%, #c9d6e3 100%);
+            border-bottom: 1px solid #b0b8c1;
+        }
+        .navbar-brand, .nav-link, .navbar-nav .nav-link.active {
+            color: #2d3a4a !important;
+            font-weight: 500;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #3b6ea5 !important;
+        }
+        .card {
+            border-radius: 10px;
+            border: 1px solid #e3eaf6;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+        }
+        .btn-primary {
+            background-color: #3b6ea5;
+            border-color: #3b6ea5;
+        }
+        .btn-primary:hover {
+            background-color: #2d3a4a;
+            border-color: #2d3a4a;
+        }
+        .btn-success {
+            background-color: #4eaf7c;
+            border-color: #4eaf7c;
+        }
+        .btn-success:hover {
+            background-color: #357a50;
+            border-color: #357a50;
+        }
+        .btn-secondary {
+            background-color: #b0b8c1;
+            border-color: #b0b8c1;
+            color: #2d3a4a;
+        }
+        .btn-secondary:hover {
+            background-color: #8a99a8;
+            border-color: #8a99a8;
+            color: #fff;
+        }
+        .progress-bar {
+            background-color: #3b6ea5;
+        }
+        .breadcrumb {
+            background: none;
+        }
+        .alert-info {
+            background-color: #e3eaf6;
+            color: #2d3a4a;
+        }
+        .alert-success {
+            background-color: #d4f3e3;
+            color: #357a50;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="theme-classic-blue">
+    <nav class="navbar navbar-expand-lg navbar-light mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-mortarboard-fill"></i> IT Learning Management System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="bi bi-house-door"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="topicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-list-ul"></i> Topics
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="topicsDropdown">
+                            {% for category in categories %}
+                                <li class="dropdown-submenu position-relative">
+                                    <a class="dropdown-item {% if category.id == current_category_id %}menu-active{% endif %}" href="/courses/?category={{ category.id }}">
+                                        <i class="bi bi-folder2-open"></i> {{ category.name }}
+                                    </a>
+                                    {% if category.courses.all %}
+                                        <ul class="dropdown-menu position-absolute start-100 top-0 mt-0">
+                                            {% for course in category.courses.all %}
+                                                <li><a class="dropdown-item {% if course.id == current_course_id %}submenu-active{% endif %}" href="/courses/{{ course.id }}/"><i class="bi bi-journal-code"></i> {{ course.title }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/courses/"><i class="bi bi-collection-play"></i> Courses</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> My Account
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="/student/dashboard/"><i class="bi bi-person-badge"></i> Student Dashboard</a></li>
+                                <li><a class="dropdown-item" href="/instructor/dashboard/"><i class="bi bi-easel"></i> Instructor Dashboard</a></li>
+                                <li><a class="dropdown-item" href="/profile/"><i class="bi bi-person"></i> My Profile</a></li>
+                                {% if user.is_superuser %}
+                                <li><a class="dropdown-item" href="/admin/"><i class="bi bi-shield-lock"></i> Admin Dashboard</a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/logout/"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/messages/inbox/">Inbox</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/messages/sent/">Sent</a></li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login/"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register/"><i class="bi bi-person-plus"></i> Register</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-palette"></i> Theme
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
+                            <li><a class="dropdown-item theme-select" data-theme="theme-classic-blue" href="#"><i class="bi bi-droplet"></i> Classic Blue</a></li>
+                            <li><a class="dropdown-item theme-select" data-theme="theme-modern-green" href="#"><i class="bi bi-droplet-half"></i> Modern Green</a></li>
+                            <li><a class="dropdown-item theme-select" data-theme="theme-elegant-purple" href="#"><i class="bi bi-droplet-fill"></i> Elegant Purple</a></li>
+                            <li><a class="dropdown-item theme-select" data-theme="theme-dark-mode" href="#"><i class="bi bi-moon-stars"></i> Dark Mode</a></li>
+                            <li><a class="dropdown-item theme-select" data-theme="theme-sunset" href="#"><i class="bi bi-sunset"></i> Sunset</a></li>
+                            <li><a class="dropdown-item theme-select" data-theme="theme-tech-blue-gradient" href="#"><i class="bi bi-cpu"></i> Tech Blue Gradient</a></li>
+                        </ul>
+                    </li>
+                    {% if user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/analytics/">Admin Analytics</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Theme switcher logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeLinks = document.querySelectorAll('.theme-select');
+        const body = document.body;
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('lms_theme');
+        if (savedTheme) {
+            body.className = savedTheme;
+        }
+        themeLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                body.className = this.getAttribute('data-theme');
+                localStorage.setItem('lms_theme', this.getAttribute('data-theme'));
+            });
+        });
+    });
+    </script>
+</body>
+</html> 

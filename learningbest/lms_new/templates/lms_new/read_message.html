@@ -1,0 +1,10 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}Read Message{% endblock %}
+{% block content %}
+<h2>Message from {{ msg.sender.username }}</h2>
+<p><strong>Date:</strong> {{ msg.timestamp|date:'Y-m-d H:i' }}</p>
+<p><strong>Message:</strong></p>
+<div class="border p-3 mb-3">{{ msg.content|linebreaks }}</div>
+<a href="/messages/compose/?to={{ msg.sender.id }}" class="btn btn-primary">Reply</a>
+<a href="/messages/inbox/" class="btn btn-secondary">Back to Inbox</a>
+{% endblock %} 

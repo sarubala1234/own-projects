@@ -1,0 +1,21 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}Inbox{% endblock %}
+{% block content %}
+<h2>Inbox</h2>
+<a href="/messages/compose/" class="btn btn-primary mb-3">Compose Message</a>
+<table class="table">
+  <thead><tr><th>From</th><th>Message</th><th>Date</th><th>Status</th></tr></thead>
+  <tbody>
+    {% for msg in messages_in %}
+      <tr{% if not msg.is_read %} style="font-weight:bold;"{% endif %}>
+        <td>{{ msg.sender.username }}</td>
+        <td><a href="/messages/read/{{ msg.id }}/">{{ msg.content|truncatewords:8 }}</a></td>
+        <td>{{ msg.timestamp|date:'Y-m-d H:i' }}</td>
+        <td>{% if msg.is_read %}Read{% else %}Unread{% endif %}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4">No messages.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %} 

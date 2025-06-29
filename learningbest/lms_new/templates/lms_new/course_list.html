@@ -1,0 +1,144 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}IT Courses - Course List{% endblock %}
+{% block content %}
+    <div class="mt-5 text-center">
+        <h1 class="mb-2">Available IT Courses</h1>
+        <div class="subtitle-classic mb-4">Explore, Enroll, and Excel in Technology</div>
+    </div>
+    {% if courses %}
+        <div class="row g-4 justify-content-center">
+            {% for course in courses %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="course-card card h-100 border-0 shadow-sm position-relative">
+                        <div class="card-body d-flex flex-column">
+                            <div class="course-logo mb-2 mx-auto">
+                                {% if 'python' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'react' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'java' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'javascript' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'html' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'css' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'c++' in course.title|lower or 'cplusplus' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++ Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'c#' in course.title|lower or 'csharp' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'django' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'node' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'machine learning' in course.title|lower or 'ai' in course.title|lower %}
+                                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="AI/ML Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'data science' in course.title|lower %}
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" alt="Data Science Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'web development' in course.title|lower %}
+                                    <img src="https://cdn-icons-png.flaticon.com/512/841/841364.png" alt="Web Dev Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'scratch' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scratch/scratch-original.svg" alt="Scratch Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'ethical hacking' in course.title|lower %}
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Ethical Hacking Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'network security' in course.title|lower %}
+                                    <img src="https://cdn-icons-png.flaticon.com/512/483/483361.png" alt="Network Security Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'aws' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'docker' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'kubernetes' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'flutter' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'sql' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'mongodb' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'pandas' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'deep learning' in course.title|lower %}
+                                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="Deep Learning Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% elif 'tensorflow' in course.title|lower %}
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% else %}
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="IT Logo" class="img-fluid rounded-circle shadow-sm" style="width:64px;height:64px;background:#fff;object-fit:cover;">
+                                {% endif %}
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="course-icon me-2 flex-shrink-0">
+                                    <i class="bi bi-journal-code display-6 text-primary"></i>
+                                </div>
+                                <h5 class="card-title mb-0 flex-grow-1">{{ course.title }}</h5>
+                            </div>
+                            <p class="card-text flex-grow-1">{{ course.description|truncatewords:30 }}</p>
+                            <div class="mb-2">
+                                <span class="badge bg-primary bg-opacity-75 me-1"><i class="bi bi-folder2-open"></i> {{ course.category.name }}</span>
+                                <span class="badge bg-secondary bg-opacity-50"><i class="bi bi-person"></i> {{ course.instructor.get_full_name|default:course.instructor.username }}</span>
+                            </div>
+                            <a href="/courses/{{ course.id }}/" class="btn btn-outline-primary mt-auto">View Course</a>
+                        </div>
+                        <div class="ribbon bg-primary text-white position-absolute top-0 end-0 px-3 py-1 rounded-bottom-start small" style="font-family: 'Georgia', serif; letter-spacing: 1px;">IT</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No courses available at the moment.
+        </div>
+    {% endif %}
+    <div class="mt-4">
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+    </div>
+{% endblock %}
+{% block extra_head %}
+<style>
+.subtitle-classic {
+    color: #3b6ea5;
+    font-size: 1.5rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #e3eaf6 0%, #c9d6e3 100%);
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+}
+.course-card {
+    background: linear-gradient(120deg, #f7f9fb 60%, #e3eaf6 100%);
+    border-radius: 1.25rem !important;
+    transition: transform 0.18s, box-shadow 0.18s;
+    box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.08);
+    overflow: hidden;
+}
+.course-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.16);
+    z-index: 2;
+}
+.course-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e3eaf6;
+    border-radius: 0.75rem;
+    font-size: 1.7rem;
+}
+.ribbon {
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+    opacity: 0.92;
+}
+.course-logo img {
+    border: 3px solid #e3eaf6;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+    margin-bottom: 0.5rem;
+}
+</style>
+{% endblock %} 

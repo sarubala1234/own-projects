@@ -1,0 +1,79 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}{{ course.title }} - Course Detail{% endblock %}
+{% block content %}
+    <div class="mt-5 text-center">
+        <h1 class="mb-2">{{ course.title }}</h1>
+        <div class="subtitle-classic mb-4">{{ course.category.name }} | Taught by {{ course.instructor.get_full_name|default:course.instructor.username }}</div>
+    </div>
+    {% if enrolled %}
+        <div class="alert alert-info mb-4">
+            You are enrolled in this course.<br>
+            Progress: {{ progress }}%
+        </div>
+    {% endif %}
+    <h4>Lessons</h4>
+    <div class="list-group mb-4">
+        {% for lesson in lessons %}
+            {% if enrolled %}
+                <a href="/courses/{{ course.id }}/lesson/{{ lesson.id }}/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    {{ lesson.title }}
+                    {% if lesson.id in completed_lesson_ids %}
+                        <span class="badge bg-success">✓ Completed</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Not Started</span>
+                    {% endif %}
+                </a>
+            {% else %}
+                <div class="list-group-item">
+                    {{ lesson.title }}
+                </div>
+            {% endif %}
+        {% empty %}
+            <div class="list-group-item">No lessons yet.</div>
+        {% endfor %}
+    </div>
+    <h4>Comments</h4>
+    <ul class="list-group mb-4">
+      {% for comment in comments %}
+        <li class="list-group-item">
+          <strong>{{ comment.user.username }}</strong> <small>{{ comment.created_at|date:'Y-m-d H:i' }}</small><br>
+          {{ comment.text|linebreaks }}
+        </li>
+      {% empty %}
+        <li class="list-group-item">No comments yet.</li>
+      {% endfor %}
+    </ul>
+    {% if not enrolled %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Enroll in this course</button>
+        </form>
+    {% endif %}
+    {% if enrolled %}
+      <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+      </form>
+    {% endif %}
+    {% if enrolled and progress == 100 %}
+      <a href="{% url 'download_certificate' course.id %}" class="btn btn-warning mb-3">Download Certificate</a>
+    {% endif %}
+    <a href="/courses/" class="btn btn-secondary mt-3">Back to Courses</a>
+{% endblock %}
+{% block extra_head %}
+<style>
+.subtitle-classic {
+    color: #3b6ea5;
+    font-size: 1.2rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #e3eaf6 0%, #c9d6e3 100%);
+    border-radius: 8px;
+    padding: 0.4rem 1.2rem;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+}
+</style>
+{% endblock %} 
