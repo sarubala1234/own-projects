@@ -1,0 +1,29 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>My Profile</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Account Info</h5>
+        {{ user_form.as_p }}
+      </div>
+      <div class="col-md-6">
+        <h5>Profile Info</h5>
+        {% if profile_form.instance.avatar %}
+          <img src="{{ profile_form.instance.avatar.url }}" alt="Avatar" width="100" class="mb-2"><br>
+        {% endif %}
+        {{ profile_form.as_p }}
+      </div>
+    </div>
+    {% if not view_only %}
+      <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+      <a href="{% url 'profile_view' %}" class="btn btn-secondary mt-3">Cancel</a>
+    {% else %}
+      <a href="{% url 'profile_edit' %}" class="btn btn-primary mt-3">Edit Profile</a>
+    {% endif %}
+  </form>
+</div>
+{% endblock %} 

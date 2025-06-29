@@ -1,0 +1,18 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}Admin Analytics{% endblock %}
+{% block content %}
+  <h1>Admin Analytics</h1>
+  <ul>
+    <li>Total users: {{ total_users }}</li>
+    <li>Total courses: {{ total_courses }}</li>
+    <li>Total lessons: {{ total_lessons }}</li>
+  </ul>
+  <h3>Most Popular Courses</h3>
+  <ol>
+    {% for course in popular_courses %}
+      <li>{{ course.title }} ({{ course.enroll_count }} enrollments)</li>
+    {% empty %}
+      <li>No courses found.</li>
+    {% endfor %}
+  </ol>
+{% endblock %} 

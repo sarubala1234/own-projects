@@ -1,0 +1,13 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}{% if create %}Create Course{% else %}Edit Course{% endif %}{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>{% if create %}Create Course{% else %}Edit Course{% endif %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% if create %}Create{% else %}Save Changes{% endif %}</button>
+    <a href="{% url 'instructor_course_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %} 

@@ -1,0 +1,12 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}Quiz Result{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Quiz Result: {{ quiz.title }}</h2>
+  <div class="alert alert-info">
+    <strong>Score:</strong> {{ score }} / {{ total }}<br>
+    <strong>Percentage:</strong> {{ percent }}%
+  </div>
+  <a href="/student/dashboard/" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %} 

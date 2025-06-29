@@ -1,15 +1,11 @@
 from django.urls import path
 from . import views
-<<<<<<< HEAD
 from django.contrib.auth import views as auth_views
-=======
->>>>>>> 40f2d7bc92c50ced5b38edc02b258f43b57b8198
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('courses/', views.course_list, name='course_list'),
     path('courses/<int:course_id>/', views.course_detail, name='course_detail'),
-<<<<<<< HEAD
     path('courses/<int:course_id>/lesson/<int:lesson_id>/', views.lesson_view, name='lesson_view'),
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),
@@ -65,10 +61,4 @@ urlpatterns = [
     path('messages/sent/', views.sent_messages, name='sent_messages'),
     path('messages/compose/', views.compose_message, name='compose_message'),
     path('messages/read/<int:message_id>/', views.read_message, name='read_message'),
-=======
-    path('register/', views.register, name='register'),
-    path('login/', views.login_view, name='login'),
-    path('student/dashboard/', views.student_dashboard, name='student_dashboard'),
-    path('instructor/dashboard/', views.instructor_dashboard, name='instructor_dashboard'),
->>>>>>> 40f2d7bc92c50ced5b38edc02b258f43b57b8198
 ] 

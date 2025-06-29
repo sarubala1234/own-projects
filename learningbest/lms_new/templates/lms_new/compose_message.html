@@ -1,0 +1,11 @@
+{% extends 'lms_new/base.html' %}
+{% block title %}Compose Message{% endblock %}
+{% block content %}
+<h2>Compose Message</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Send</button>
+  <a href="/messages/inbox/" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %} 
